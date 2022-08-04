@@ -6,6 +6,7 @@ import (
 	"golang-store-management/pkg/db"
 	"golang-store-management/pkg/model"
 	"net/http"
+	"strings"
 
 	"github.com/sirupsen/logrus"
 )
@@ -54,6 +55,10 @@ func (S *Store) CreateNewItem(w http.ResponseWriter, r *http.Request) {
 
 	err = db.CreateItem(S.DB, newItem)
 	if err != nil {
+		if strings.Contains(err.Error(), "UNIQUE constraint failed") {
+			http.Error(w, "Item ID already exists, please enter a new unique id", http.StatusBadRequest)
+			return
+		}
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
