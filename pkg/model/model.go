@@ -8,3 +8,10 @@ type Item struct {
 	Available bool   `json:"available" db:"name"`
 	Quantity  int    `json:"quantity" db:"name"`
 }
+
+type ErrorResponse struct {
+	Error string `json:"error"`
+}
+type SuccessResponse struct {
+	Detail string `json:"detail"`
+}

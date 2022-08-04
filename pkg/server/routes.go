@@ -21,7 +21,7 @@ func (S *Store) CreateRoutes() *mux.Router {
 	router.Use(auth)
 	router = router.PathPrefix("/store").Subrouter()
 	router.HandleFunc("/getItems", S.GetItems).Methods(http.MethodGet)
-	router.HandleFunc("/createItem", S.CreateItem).Methods(http.MethodPost)
+	router.HandleFunc("/createItem", S.CreateNewItem).Methods(http.MethodPost)
 
 	return router
 }

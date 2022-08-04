@@ -37,6 +37,6 @@ func AllItems(db *gorm.DB) ([]model.Item, error) {
 	return items, nil
 }
 
-func CreateItem(db *gorm.DB, item model.Item) {
-	db.Create(&item)
+func CreateItem(db *gorm.DB, item model.Item) error {
+	return db.Create(&item).Error
 }
